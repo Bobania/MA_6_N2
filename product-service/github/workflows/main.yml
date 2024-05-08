@@ -5,20 +5,19 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_and_push_to_dockerhub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: rubyshores/prac7:micro
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rubyshores/prac7:$(date +%s)
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Push to Docker Hub
+      run: docker push rubyshores/prac7:$(date +%s)
+
+#docker login  -u rubyshores
+#dckr_pat_uJg6AB4YrqehqvyQeP5M64aC_X4
