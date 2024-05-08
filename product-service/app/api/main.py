@@ -19,7 +19,6 @@ async def startup():
     await database.connect()
     return 'Database connected'
 
-
 @app.on_event("startup")
 async def startup_event():
     await startup()
