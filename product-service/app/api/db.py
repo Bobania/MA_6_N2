@@ -4,8 +4,8 @@ from sqlalchemy import Column, Integer, MetaData, String, Table, create_engine, 
 from databases import Database
 from models import ProductStatuses
 
-#DATABASE_URI = 'postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/postgres'
-DATABASE_URI = 'postgresql://admin:adminadmin@localhost:5432/postgres'
+DATABASE_URI = 'postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/postgres'
+#DATABASE_URI = 'postgresql://admin:adminadmin@localhost:5432/postgres'
 
 engine = create_engine(DATABASE_URI)
 metadata = MetaData()
