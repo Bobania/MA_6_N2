@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-COPY ./requirements.txt /product-service/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 RUN apt-get update \
     && apt-get install gcc -y \
