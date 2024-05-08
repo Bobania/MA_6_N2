@@ -1,17 +1,20 @@
-FROM ubuntu:latest
-
-# Используйте официальный образ Python как базовый
 FROM python:3.8-slim
 
-# Установите рабочую директорию в контейнере
+RUN apt-get update && \
+    apt-get install -y postgresql-server-dev-all
+
 WORKDIR /app
 
-# Копируйте файлы проекта в контейнер
-COPY . /app
+COPY ./requirements.txt /app/requirements.txt
 
-# Установите зависимости
-RUN pip install --no-cache-dir -r requirements.txt
-CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8001"]
+RUN apt-get update \
+    && apt-get install gcc -y \
+    && apt-get clean
+
+RUN pip install -r /app/requirements.txt \
+    && rm -rf /root/.cache/pip
+
+COPY . /app/
 
 
-ENTRYPOINT ["top", "-b"]
+CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
