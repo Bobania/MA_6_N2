@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from typing_extensions import List, Optional
 from sqlalchemy import DateTime, Enum
 
-
 class ProductStatuses(enum.Enum):
     DELIVERY = "delivery"
     AVAILABLE = "available"

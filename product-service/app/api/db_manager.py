@@ -21,5 +21,3 @@ async def get_product(id):
 async def delete_product(id: int):
     query = products.delete().where(products.c.id == id)
     return await database.execute(query=query)
-
-

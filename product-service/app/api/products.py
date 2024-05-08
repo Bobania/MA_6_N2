@@ -37,3 +37,4 @@ async def delete_product_by_id(id: int):
     if not company:
         raise HTTPException(status_code=404, detail="Product not found")
     return await delete_product(id)
+

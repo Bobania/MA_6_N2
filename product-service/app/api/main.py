@@ -26,4 +26,3 @@ async def startup_event():
 
 
 app.include_router(products, prefix='/api/products', tags=['Склад'])
-
