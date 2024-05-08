@@ -18,5 +18,5 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Push to DockerHub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/prac7:latest
+        run: docker push rubyshores/prac7:latest
         #dckr_pat_8EgXsagCmFAZ__1gTCm1JIqQ2w4
