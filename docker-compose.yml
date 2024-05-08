@@ -1,0 +1,67 @@
+version: '3.10'
+
+services:
+  refund_service:
+    build: ./refund-service
+    volumes:
+      - ./refund-service/:/app/
+    ports:
+      - 8001:8001 # Исправлено для соответствия порту, который слушает приложение
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminadmin
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: product_db # Используйте имя сервиса базы данных
+      POSTGRES_PORT: 5432
+      DATABASE_URI: postgresql://admin:adminadmin@product_db/postgres # Исправлено для правильного подключения к базе данных
+      POSTGRES_URL: postgresql://myuser:pgpwd@student_db:5432/postgres
+      AMQP_URL: amqp://guest:guest123@51.250.26.59:5672/
+    networks:
+      - app_network
+
+
+  refund_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_refund:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminadmin
+      POSTGRES_DB: postgres
+    networks:
+      - app_network
+  product_service:
+    build: ./product-service
+    volumes:
+      - ./product-service/:/app/
+    ports:
+      - 8000:8000 # Исправлено для соответствия порту, который слушает приложение
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminadmin
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: producte_db # Используйте имя сервиса базы данных
+      POSTGRES_PORT: 5432
+      DATABASE_URI: postgresql://admin:adminadmin@product_db/postgres # Исправлено для правильного подключения к базе данных
+      POSTGRES_URL: postgresql://myuser:pgpwd@student_db:5432/postgres
+      AMQP_URL: amqp://guest:guest123@51.250.26.59:5672/
+    networks:
+      - app_network
+  product_db:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data_product:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminadmin
+      POSTGRES_DB: product
+    networks:
+      - app_network
+volumes:
+  postgres_data_product:
+  postgres_data_refund:
+
+
+networks:
+  app_network:
+    driver: bridge
