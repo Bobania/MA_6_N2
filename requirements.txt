@@ -1,0 +1,17 @@
+asyncpg
+databases[postgresql]
+fastapi
+SQLAlchemy
+uvicorn
+httpx
+pytest
+httptools
+anyio
+loki_handler
+python-keycloak
+psycopg2-binary
+requests
+python-multipart
+jsonify
+itsdangerous
+requests
