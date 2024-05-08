@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build dockerfile
-        run: docker build . --file product-service/Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/prac7:latest
+        run: docker build . --file product-service/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}prac7:latest
 
       - name: Push to dockerhub
         uses: docker/login-action@v3.0.0
