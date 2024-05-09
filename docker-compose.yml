@@ -6,7 +6,7 @@ services:
     volumes:
       - ./refund-service/:/app/
     ports:
-      - 8001:8001 # Исправлено для соответствия порту, который слушает приложение
+      - 8080:8080 # Исправлено для соответствия порту, который слушает приложение
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: adminadmin

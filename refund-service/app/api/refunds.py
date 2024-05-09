@@ -24,21 +24,41 @@ async def create_refund(payload: Annotated[RefundIn, Depends()]):
 
 @refunds.get('/get_refunds', response_model=List[RefundOut])
 async def get_refunds():
-    return await get_all_refunds()
-
+    try:
+        result = await get_all_refunds()
+        if result is None:
+            raise HTTPException(status_code=404, detail='refunds not found')
+        return result
+    except HTTPException as http_exc:
+        # Переадресация исключений от функции get_all_payments()
+        raise http_exc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 @refunds.get('/{id}/', response_model=RefundOut)
 async def get_refund_by_id(id: int):
-    refunds_by_id = await get_refund(id)
-    if not refunds_by_id:
-        raise HTTPException(status_code=404, detail="Refund not found")
-    return refunds_by_id
+    try:
+        refunds_by_id = await get_refund(id)
+        if not refunds_by_id:
+            raise HTTPException(status_code=404, detail="refund not found")
+        return refunds_by_id
+    except HTTPException as http_exc:
+        # Переопределение исключений от функции get_payment()
+        raise http_exc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail='Internal server error')
 
 
 @refunds.delete('/delete_refunds/{id}/', response_model=None)
 async def delete_refund_from_db(id: int):
-    refunds_by_id = await get_refund(id)
-    if not refunds_by_id:
-        raise HTTPException(status_code=404, detail="Refund not found")
-    await delete_refund(id)
-    return {"message": f"Refund with ID {id} has been successfully deleted."}
+    try:
+        refunds_by_id = await get_refund(id)
+        if not refunds_by_id:
+            raise HTTPException(status_code=404, detail='Payment not found')
+        await delete_refund(id)
+        return {'message': f'Payment with ID {id} has been successfully deleted'}
+    except HTTPException as http_exc:
+        # Переопределение исключений от функции get_payment()
+        raise http_exc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail='Internal server error')

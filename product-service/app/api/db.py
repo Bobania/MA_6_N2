@@ -15,7 +15,7 @@ products = Table(
     metadata,
     Column('id', Integer, primary_key=True),
     Column('name', String(20)),
-    Column('description', String(20)),
+    Column('description', String(50)),
     Column('in_stock', Integer),
     Column('price_rub', Integer),
     Column('status', Enum(ProductStatuses))

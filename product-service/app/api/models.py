@@ -20,3 +20,8 @@ class ProductIn(BaseModel):
 
 class ProductOut(ProductIn):
     id: int
+
+
+
+class ProductOut(ProductIn):
+    id: int

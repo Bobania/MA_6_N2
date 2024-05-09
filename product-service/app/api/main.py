@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from products import products
+from .products import products
 from db import metadata, database, engine
 
 # main лежит тут потому что иначе не работают функции в __init__.py (Он не пустой)
@@ -14,7 +14,7 @@ metadata.create_all(engine)
 
 app = FastAPI(title="Интернет-магазин настольных игр")
 
-
+@app.on_event('startup')
 async def startup():
     await database.connect()
     return 'Database connected'
@@ -22,6 +22,7 @@ async def startup():
 @app.on_event("startup")
 async def startup_event():
     await startup()
+
 
 
 app.include_router(products, prefix='/api/products', tags=['Склад'])
