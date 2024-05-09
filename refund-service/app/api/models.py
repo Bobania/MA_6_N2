@@ -8,9 +8,9 @@ class RefundMethod(enum.Enum):
     NOT_PAY = 'not_refund_pay'
 
 
-class RefundStatuses(enum.Enum):
-    REFUND_GAME = 'refund_game'
-    NOT_REFUND_GAME = 'not_refund_game'
+# class RefundStatuses(enum.Enum):
+#     REFUND_GAME = 'refund_game'
+#     NOT_REFUND_GAME = 'not_refund_game'
 
 
 class RefundIn(BaseModel):
