@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Yandex
-      run: docker build . --file refund-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/refund-service:latest --platform=linux/amd64
+      run: docker build refund-service/ --file refund-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/refund-service:latest --platform=linux/amd64
     - name: Login to YC Registry
       uses: docker/login-action@v3.0.0
       with:
