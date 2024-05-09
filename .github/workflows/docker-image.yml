@@ -13,7 +13,7 @@ jobs:
       - name: Prepare for tests
         run: |
           sudo apt install -y python3-pip
-          pip install -r requirements.txt
+          pip install -r product-service/requirements.txt
           docker build . --file product-service/Dockerfile --tag rubyshores/prac7:latest
       - name: Run tests
         run: |

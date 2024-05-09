@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip
-          pip install -r requirements.txt
+          pip install -r refund-service/requirements.txt
           docker build refund-service/ --file refund-service/Dockerfile --tag ${{secrets.YC_REGISTRY_ID}}/refund-service:latest
           docker run -p 80:80 -d ${{secrets.YC_REGISTRY_ID}}/refund-service:latest
           sleep 10
