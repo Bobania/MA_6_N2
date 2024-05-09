@@ -19,9 +19,9 @@ app = FastAPI(title='Online store of board games: Refund', openapi_url="/refunds
 #
 refunds_router = APIRouter()
 refund_data = [
-    {'id': 1, 'purchase_id': 3,   'status': 'refund_pay' },
-    {'id': 2, 'purchase_id': 4,   'status': 'refund_pay'},
-    {'id': 3, 'purchase_id': 5,   'status': 'refund_pay'}
+    {'id': 1, 'refund_id': 3,   'status': 'refund_pay' },
+    {'id': 2, 'refund_id': 4,   'status': 'refund_pay'},
+    {'id': 3, 'refund_id': 5,   'status': 'refund_pay'}
 ]
 # @app.get('/', tags=['Запуск'])
 # async def startup():
@@ -30,15 +30,15 @@ refund_data = [
 
 
 
-@refunds_router.get("/get_all_payments")
-async def read_refund():
-    return 'Hello World'
+@refunds_router.get("/get_all_refunds")
+async def read_payments():
+    return refund_data
 
-@refunds_router.get("/{payments_id}")
-async def read_payment(payment_id: int):
-    for payment in refund_data:
-        if payment['id'] == payment_id:
-            return payment
+@refunds_router.get("/{refunds_id}")
+async def read_payment(refund_id: int):
+    for refund in refund_data:
+        if refund['id'] == refund_id:
+            return refund
     return None
 
 
