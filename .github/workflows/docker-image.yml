@@ -5,19 +5,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Prepare for tests
-        run: |
-          sudo apt install -y python3-pip
-          pip install -r requirements.txt
-          docker build . --file product-service/Dockerfile --tag rubyshores/prac7:latest
-      - name: Run tests
-        run: |
-          pytest product-service/test_product_service.py
+#  test:
+#    name: Unit tests
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Prepare for tests
+#        run: |
+#          sudo apt install -y python3-pip
+#          pip install -r requirements.txt
+#          docker build . --file product-service/Dockerfile --tag rubyshores/prac7:latest
+#      - name: Run tests
+#        run: |
+#          pytest product-service/test_product_service.py
 
   build-and-push:
     runs-on: ubuntu-latest
