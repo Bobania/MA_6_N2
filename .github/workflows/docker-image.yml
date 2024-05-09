@@ -17,7 +17,7 @@ jobs:
           docker build . --file product-service/Dockerfile --tag rubyshores/prac7:latest
       - name: Run tests
         run: |
-          pytest test_product_service.py
+          pytest product-service/test_product_service.py
 
   build-and-push:
     runs-on: ubuntu-latest

@@ -22,7 +22,7 @@ jobs:
 
       - name: Run tests
         run: |
-          python3 test_refund_service.py
+           python3 pytest refund-service/test_refund_service.py
 
   build-and-push-yc:
     runs-on: ubuntu-latest

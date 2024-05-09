@@ -163,7 +163,7 @@ async def test_delete_product():
         assert exc_info.value.detail == 'product not found'
 
 
-# purchases.py Тесты
+# products.py Тесты
 
 
 # Тест добавления product
