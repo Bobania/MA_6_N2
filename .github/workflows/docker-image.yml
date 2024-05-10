@@ -55,7 +55,7 @@ jobs:
         run: |
           sudo apt install -y python3-pip
           pip install -r requirements.txt
-          docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/product-service:latest
+          docker build . --file product-service/Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/product-service:latest
       - name: Run tests
         run: |
           pytest test_product_service.py
@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build dockerfile
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/product-service:latest
+        run: docker build . --file product-service/Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/product-service:latest
 
       - name: Push to dockerhub
         uses: docker/login-action@v3.0.0
