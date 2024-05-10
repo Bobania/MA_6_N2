@@ -46,19 +46,19 @@ on:
     branches: [ "master" ]
 
 jobs:
-#  test:
-#    name: Unit tests
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Prepare for tests
-#        run: |
-#          sudo apt install -y python3-pip
-#          pip install -r requirements.txt
-#          docker build . --file product-service/Dockerfile --tag rubyshores/product-service:latest
-#      - name: Run tests
-#        run: |
-#          pytest test_product_service.py
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Prepare for tests
+        run: |
+          sudo apt install -y python3-pip
+          pip install -r requirements.txt
+          docker build . --file product-service/Dockerfile --tag rubyshores/product-service:latest
+      - name: Run tests
+        run: |
+          pytest test_product_service.py
 
   build-and-push:
     runs-on: ubuntu-latest
@@ -74,3 +74,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to DockerHub
         run: docker push rubyshores/product-service:latest
+
+        #dckr_pat_Wj7zRxQmgFAv79PuHoCXwX2IYAU
