@@ -4,6 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
 
+
 jobs:
   tests:
     name: Prepare E2E tests
