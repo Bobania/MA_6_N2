@@ -9,7 +9,7 @@ import random
 #metadata.create_all(engine)
 
 app = FastAPI(title='Online store of board games: Refund', openapi_url="/refunds/openapi.json",
-              docs_url="/api/refunds/docs")
+              docs_url="/docs")
 #app = FastAPI(title="Интернет-магазин настольных игр 2")
 
 # product_id = random.randint(1, 100)
