@@ -34,3 +34,6 @@ jobs:
       - name: Push to DockerHub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/product-service:latest
         #dckr_pat_8EgXsagCmFAZ__1gTCm1JIqQ2w4
+
+
+
