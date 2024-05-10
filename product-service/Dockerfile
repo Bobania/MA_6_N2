@@ -14,6 +14,8 @@ RUN apt-get update \
 RUN pip install -r /app/requirements.txt \
     && rm -rf /root/.cache/pip
 
+RUN pip install python-keycloak
+
 COPY . /app/
 
 

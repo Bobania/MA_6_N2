@@ -6,7 +6,7 @@ services:
     volumes:
       - ./refund-service/:/app/
     ports:
-      - 8080:8080 # Исправлено для соответствия порту, который слушает приложение
+      - 8020:8020 # Исправлено для соответствия порту, который слушает приложение
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: adminadmin
@@ -30,6 +30,8 @@ services:
       POSTGRES_DB: postgres
     networks:
       - app_network
+
+
   product_service:
     build: ./product-service
     volumes:
@@ -40,13 +42,18 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: adminadmin
       POSTGRES_DB: postgres
-      POSTGRES_HOST: producte_db # Используйте имя сервиса базы данных
+      POSTGRES_HOST: product_db # Используйте имя сервиса базы данных
       POSTGRES_PORT: 5432
       DATABASE_URI: postgresql://admin:adminadmin@product_db/postgres # Исправлено для правильного подключения к базе данных
       POSTGRES_URL: postgresql://myuser:pgpwd@student_db:5432/postgres
       AMQP_URL: amqp://guest:guest123@51.250.26.59:5672/
     networks:
       - app_network
+    depends_on:
+      - keycloak
+
+
+
   product_db:
     image: postgres:12.1-alpine
     volumes:
@@ -57,9 +64,27 @@ services:
       POSTGRES_DB: product
     networks:
       - app_network
+
+  keycloak:
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
+    image: quay.io/keycloak/keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+    networks:
+      - app_network
+
+
 volumes:
   postgres_data_product:
   postgres_data_refund:
+
+
 
 
 networks:

@@ -13,7 +13,7 @@ class RefundMethod(enum.Enum):
 
 
 
-base_url = 'http://0.0.0.0:8080/api/refunds/'
+base_url = 'http://localhost:8020/api/refund/'
 
 product_id: int
 status: RefundMethod
@@ -39,8 +39,8 @@ def mock_request_with_data_by_id(adapter, refund_id, refund_data):
     adapter.register_uri('GET', f'{base_url}{refund_id}/', json=refund_data, status_code=200)
 
 
-# Тест получения payments по id
-def test_get_payment_by_id_found():
+# Тест получения refunds по id
+def test_get_refund_by_id_found():
     with requests_mock.Mocker() as m:
         # Регистрации маршрута с помощью адаптера
         mock_request_with_data_by_id(m, mock_refund_data[0]['id'], mock_refund_data[0])
