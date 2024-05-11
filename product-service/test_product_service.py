@@ -75,8 +75,7 @@ def test_product_in_stock(any_product: ProductIn):
 def test_product_price_rub(any_product: ProductIn):
     with pytest.raises(Exception):
         ProductIn(name=name, description=description, in_stock=in_stock, price_rub='-', status=status)
-    # with pytest.raises(Exception):
-    #     ProductIn(name=name, description=description, in_stock=in_stock, price_rub=-100, status=status)
+
 
 def test_product_status(any_product: ProductIn):
     with pytest.raises(Exception):
