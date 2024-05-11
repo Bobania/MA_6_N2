@@ -4,11 +4,13 @@ from models import ProductIn
 from db import products, database
 
 
+# Функция для добавления нового продукта в базу данных.
 async def add_product(payload: ProductIn):
     query = products.insert().values(**payload.model_dump())
     return await database.execute(query=query)
 
 
+# Функция для получения списка всех продуктов из базы данных.
 async def get_all_product():
     try:
         query = products.select()
@@ -22,6 +24,7 @@ async def get_all_product():
         raise HTTPException(status_code=500, detail='Internal server error')
 
 
+# Функция для получения продукта по его ID.
 async def get_product(id):
     try:
         query = products.select().where(products.c.id == id)
@@ -36,6 +39,7 @@ async def get_product(id):
 
 
 
+# Функция для удаления продукта по его ID.
 async def delete_product(id: int):
     try:
         query = products.delete().where(products.c.id == id)

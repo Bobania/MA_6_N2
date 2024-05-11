@@ -1,0 +1,47 @@
+global:
+  scrape_interval: 10s
+  
+
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']
+
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:10070']
+
+  - job_name: 'loki'
+    static_configs:
+      - targets: ['loki:3100']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node:9100']
+
+  - job_name: 'product-service'
+    static_configs:
+      - targets: ['product-service:8000']
+
+  - job_name: 'refund-service'
+    static_configs:
+      - targets: ['refund-service:8020']
+
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - http://localhost:9100
+        - http://localhost:3000
+        - http://localhost:9090
+        - http://localhost:10070
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115

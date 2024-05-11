@@ -7,7 +7,7 @@ import random
 
 
 #metadata.create_all(engine)
-
+# Создание экземпляра FastAPI
 app = FastAPI(title='Online store of board games: Refund', openapi_url="/refunds/openapi.json",
               docs_url="/docs")
 #app = FastAPI(title="Интернет-магазин настольных игр 2")
@@ -16,8 +16,11 @@ app = FastAPI(title='Online store of board games: Refund', openapi_url="/refunds
 # key_id = random.randint(1, 100)
 # name = "s"
 # status = random.choice(list(RefundMethod))
-#
+
+
+# Создание роутера для обработки запросов
 refunds_router = APIRouter()
+#таблица возвратов
 refund_data = [
     {'id': 1, 'product_id': 3,   'status': 'refund_pay' },
     {'id': 2, 'product_id': 4,   'status': 'refund_pay'},
@@ -29,11 +32,12 @@ refund_data = [
 #     return 'База данных присоеденена'
 
 
-
+# Эндпоинт для получения списка всех возвратов.
 @refunds_router.get("/get_all_refunds")
 async def read_payments():
     return refund_data
 
+# Эндпоинт для получения информации о возврате по его id.
 @refunds_router.get("/{refunds_id}")
 async def read_payment(refund_id: int):
     for refund in refund_data:
