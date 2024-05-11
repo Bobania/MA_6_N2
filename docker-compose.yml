@@ -20,16 +20,6 @@ services:
       - app_network
 
 
-#  refund_db:
-#    image: postgres:12.1-alpine
-#    volumes:
-#      - postgres_data_refund:/var/lib/postgresql/data/
-#    environment:
-#      POSTGRES_USER: admin
-#      POSTGRES_PASSWORD: adminadmin
-#      POSTGRES_DB: postgres
-#    networks:
-#      - app_network
 
 
   product_service:
@@ -53,17 +43,6 @@ services:
       - keycloak
 
 
-
-#  product_db:
-#    image: postgres:12.1-alpine
-#    volumes:
-#      - postgres_data_product:/var/lib/postgresql/data/
-#    environment:
-#      POSTGRES_USER: admin
-#      POSTGRES_PASSWORD: adminadmin
-#      POSTGRES_DB: product
-#    networks:
-#      - app_network
 
   keycloak:
     volumes:
